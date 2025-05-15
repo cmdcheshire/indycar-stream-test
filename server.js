@@ -6,18 +6,18 @@ function processXMLStream(stream) {
     let rootTagStack = [];
     let invalidDataBuffer = '';
     let inRecoveryMode = false;
+    let recoveredChunks = [];
+    let validChunks = [];
 
     parser.on('opentag', node => {
         if (inRecoveryMode) {
-            console.log('Recovered Chunk:');
-            console.log(invalidDataBuffer.trim());
-            console.log('-------------------');
+            recoveredChunks.push(invalidDataBuffer.trim());
             invalidDataBuffer = '';
             inRecoveryMode = false;
         }
 
         if (rootTagStack.length === 0) {
-            console.log('Root Tag:', node.name);
+            validChunks.push(`<${node.name}>`);
         }
         rootTagStack.push(node.name);
     });
@@ -25,10 +25,13 @@ function processXMLStream(stream) {
     parser.on('text', text => {
         if (inRecoveryMode) {
             invalidDataBuffer += text;
+        } else if (rootTagStack.length > 0) {
+            validChunks[validChunks.length - 1] += text;
         }
     });
 
     parser.on('closetag', tagName => {
+        validChunks[validChunks.length - 1] += `</${tagName}>`;
         rootTagStack.pop();
     });
 
@@ -38,8 +41,21 @@ function processXMLStream(stream) {
     });
 
     stream.pipe(parser);
+
+    // Print one chunk per second
+    setInterval(() => {
+        if (recoveredChunks.length > 0) {
+            console.log('Recovered Chunk:');
+            console.log(recoveredChunks.shift()); // Print and remove first chunk
+            console.log('-------------------');
+        } else if (validChunks.length > 0) {
+            console.log('Valid Chunk:');
+            console.log(validChunks.shift()); // Print and remove first chunk
+            console.log('-------------------');
+        }
+    }, 1000);
 }
 
-// Example usage: Reads telemetry.xml instead of example.xml
+// Example usage: Reads telemetry.xml
 const xmlStream = fs.createReadStream('telemetry.xml', { encoding: 'utf-8' });
 processXMLStream(xmlStream);
