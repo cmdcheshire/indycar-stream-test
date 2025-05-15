@@ -194,5 +194,7 @@ function extractRootTags(xmlString) {
   return rootTags;
 }
 
+extractRootTags(xmlStream);
+
 const extractedTags = extractRootTags(xmlStream);
 console.log(extractedTags);
