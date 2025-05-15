@@ -60,7 +60,7 @@ function playBackTelemetryStream() {
     let index = 0;
     const intervalId = setInterval(() => {
       if (index < chunks.length) {
-        const chunk = chunks[index] + '\n';
+        const chunk = chunks[index] + '\\n';
         broadcast(chunk);
         index++;
       } else {
@@ -83,3 +83,4 @@ server.listen(port, host, () => {
   console.log('TCP server listening on', host + ':' + port);
   playBackTelemetryStream();
 });
+
