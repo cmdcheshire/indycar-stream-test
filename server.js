@@ -30,11 +30,10 @@ function processTextFile(filePath) {
             chunks.push(currentChunk.join('\n')); // Add last chunk if any data remains
         }
 
-        // Print the collected chunks
+        // Print only the first line of each chunk
         chunks.forEach((chunk, index) => {
-            console.log(`Chunk ${index + 1}:`);
-            console.log(chunk);
-            console.log('-------------------');
+            const firstLine = chunk.split('\n')[0];
+            console.log(`Chunk ${index + 1}: ${firstLine}`);
         });
     });
 
