@@ -89,7 +89,7 @@ const telemetryStream = `
 <Caution_Laps>0</Caution_Laps>
 <Laps_To_Go>47</Laps_To_Go>
 </Race_Summary>
-    `;
+`;
 
     const server = net.createServer((socket) => {
       console.log('Client connected:', socket.remoteAddress + ':' + socket.remotePort);
@@ -113,6 +113,7 @@ const telemetryStream = `
         let depth = 0;
 
         for (const element of elements) {
+            console.log(`Element: ${element}, Depth: ${depth}, Current Chunk: ${currentChunk}`);
             if (element.startsWith('<') && !element.startsWith('</')) {
                 currentChunk += element;
                 depth++;
@@ -155,5 +156,4 @@ const telemetryStream = `
       console.log('TCP server listening on', host + ':' + port);
       playBackTelemetryStream();
     });
-
     
