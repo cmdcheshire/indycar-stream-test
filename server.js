@@ -107,27 +107,41 @@ const telemetryStream = `
     });
 
     function playBackTelemetryStream() {
-        const elements = telemetryStream.trim().split(/<([A-Za-z0-9_]+)[^>]*>|<\/([A-Za-z0-9_]+)>/g).filter(Boolean);
+        let xmlString = telemetryStream;
         let chunks = [];
+        let tagStack = [];
         let currentChunk = '';
-        let depth = 0;
+        let lastPos = 0;
 
-        for (const element of elements) {
-            console.log(`Element: ${element}, Depth: ${depth}, Current Chunk: ${currentChunk}`);
-            if (element.startsWith('<') && !element.startsWith('</')) {
-                currentChunk += element;
-                depth++;
-            } else if (element.startsWith('</')) {
-                currentChunk += element;
-                depth--;
-                if (depth === 0) {
+        while (lastPos < xmlString.length) {
+            const startTagOpen = xmlString.indexOf('<', lastPos);
+            if (startTagOpen === -1) {
+                break; // No more tags
+            }
+
+            const startTagClose = xmlString.indexOf('>', startTagOpen);
+            if (startTagClose === -1) {
+                break; // Invalid XML
+            }
+
+            const tagName = xmlString.substring(startTagOpen + 1, startTagClose).split(' ')[0]; // Extract tag name
+            const isClosingTag = tagName.startsWith('/');
+
+            if (!isClosingTag) {
+                tagStack.push(tagName);
+                currentChunk = xmlString.substring(lastPos, startTagClose + 1);
+            } else {
+                const matchingTag = tagStack.pop();
+                 if (matchingTag === tagName.slice(1)) {
+                    currentChunk += xmlString.substring(lastPos, startTagClose + 1);
                     chunks.push(currentChunk);
                     currentChunk = '';
                 }
-            } else {
-              currentChunk += element;
             }
+            lastPos = startTagClose + 1;
         }
+
+        console.log("Extracted Chunks:", chunks);
 
       if (chunks.length > 0) {
         let index = 0;
