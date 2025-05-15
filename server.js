@@ -37,15 +37,15 @@ const xmlStream = `
 </Unofficial_Leaderboard>
 
 <Telemetry_Leaderboard Cars="27">
-<Position Car="77" Distance_Behind="" Laps_Behind="" Rank="1" Time_Behind="" brake="0" currentLap="" rpm="11299" speed="130.498" throttle="100" steering="0" Battery_Pct_Remaining="22" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="32"/>
-<Position Car="83" Distance_Behind="" Laps_Behind="" Rank="2" Time_Behind="" brake="0" currentLap="" rpm="9845" speed="86.611" throttle="100" steering="26" Battery_Pct_Remaining="99" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="59"/>
-<Position Car="27" Distance_Behind="" Laps_Behind="" Rank="3" Time_Behind="" brake="0" currentLap="" rpm="11331" speed="134.873" throttle="100" steering="0" Battery_Pct_Remaining="61" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="61"/>
-<Position Car="10" Distance_Behind="" Laps_Behind="" Rank="4" Time_Behind="" brake="0" currentLap="" rpm="10554" speed="116.005" throttle="100" steering="0" Battery_Pct_Remaining="70" Regin_Active="False" Deploy_Active="True" Deploy_Eligible="True" Lap_Remaining="66"/>
-<Position Car="60" Distance_Behind="" Laps_Behind="" Rank="5" Time_Behind="" brake="0" currentLap="" rpm="7496" speed="66.035" throttle="6" steering="-51" Battery_Pct_Remaining="92" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="77"/>
-<Position Car="7" Distance_Behind="" Laps_Behind="" Rank="6" Time_Behind="" brake="0" currentLap="" rpm="9606" speed="82.099" throttle="100" steering="1" Battery_Pct_Remaining="72" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="75"/>
-<Position Car="3" Distance_Behind="" Laps_Behind="" Rank="7" Time_Behind="" brake="0" currentLap="" rpm="5908" speed="41.972" throttle="64" steering="-70" Battery_Pct_Remaining="64" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="75"/>
-<Position Car="2" Distance_Behind="" Laps_Behind="" Rank="8" Time_Behind="" brake="22" currentLap="" rpm="7719" speed="53.593" throttle="0" steering="-20" Battery_Pct_Remaining="45" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="75"/>
-<Position Car="26" Distance_Behind="" Laps_Behind="" Rank="9" Time_Behind="" brake="8" currentLap="" rpm="10559" speed="101.308" throttle="18" steering="-14" Battery_Pct_Remaining="36" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="72"/>
+<Position Car="77" Distance_Behind="" Laps_Behind="" Rank="1" Time_Behind="" brake="4" currentLap="" rpm="7698" speed="66.718" throttle="0" steering="38" Battery_Pct_Remaining="28" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="44"/>
+<Position Car="83" Distance_Behind="" Laps_Behind="" Rank="2" Time_Behind="" brake="36" currentLap="" rpm="8375" speed="75.126" throttle="0" steering="-13" Battery_Pct_Remaining="100" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="72"/>
+<Position Car="27" Distance_Behind="" Laps_Behind="" Rank="3" Time_Behind="" brake="0" currentLap="" rpm="11185" speed="75.126" throttle="100" steering="13" Battery_Pct_Remaining="79" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="72"/>
+<Position Car="10" Distance_Behind="" Laps_Behind="" Rank="4" Time_Behind="" brake="26" currentLap="" rpm="7309" speed="49.15" throttle="5" steering="-21" Battery_Pct_Remaining="69" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="73"/>
+<Position Car="60" Distance_Behind="" Laps_Behind="" Rank="5" Time_Behind="" brake="0" currentLap="" rpm="9699" speed="82.167" throttle="100" steering="3" Battery_Pct_Remaining="34" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="77"/>
+<Position Car="7" Distance_Behind="" Laps_Behind="" Rank="6" Time_Behind="" brake="9" currentLap="" rpm="8580" speed="75.81" throttle="0" steering="22" Battery_Pct_Remaining="19" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="75"/>
+<Position Car="3" Distance_Behind="" Laps_Behind="" Rank="7" Time_Behind="" brake="0" currentLap="" rpm="11019" speed="167.617" throttle="100" steering="0" Battery_Pct_Remaining="0" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="75"/>
+<Position Car="2" Distance_Behind="" Laps_Behind="" Rank="8" Time_Behind="" brake="0" currentLap="" rpm="10582" speed="162.49" throttle="100" steering="-3" Battery_Pct_Remaining="0" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="75"/>
+<Position Car="26" Distance_Behind="" Laps_Behind="" Rank="9" Time_Behind="" brake="0" currentLap="" rpm="11757" speed="164.199" throttle="100" steering="-6" Battery_Pct_Remaining="0" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="72"/>
 <Position Car="8" Distance_Behind="" Laps_Behind="" Rank="10" Time_Behind="" brake="0" currentLap="" rpm="11267" speed="154.765" throttle="100" steering="-3" Battery_Pct_Remaining="4" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="72"/>
 <Position Car="9" Distance_Behind="" Laps_Behind="" Rank="11" Time_Behind="" brake="0" currentLap="" rpm="11104" speed="154.287" throttle="99" steering="-3" Battery_Pct_Remaining="4" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="72"/>
 <Position Car="12" Distance_Behind="" Laps_Behind="" Rank="12" Time_Behind="" brake="0" currentLap="" rpm="11305" speed="153.261" throttle="100" steering="-1" Battery_Pct_Remaining="0" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="73"/>
@@ -147,7 +147,7 @@ function extractRootTags(xmlString) {
         break; // Error: No matching closing tag found
     }
     
-    let tagStack = [tagName];
+    let tagStack = [startTagName];
     let searchIndex = startTagEndIndex + 1;
     let foundCompleteTag = false;
     
