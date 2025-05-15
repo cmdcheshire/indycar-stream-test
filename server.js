@@ -23,6 +23,6 @@ function processXMLStream(stream) {
     stream.pipe(parser);
 }
 
-// Example usage
-const xmlStream = fs.createReadStream('example.xml', { encoding: 'utf-8' });
+// Example usage: Reads telemetry.xml instead of example.xml
+const xmlStream = fs.createReadStream('telemetry.xml', { encoding: 'utf-8' });
 processXMLStream(xmlStream);
