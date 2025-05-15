@@ -109,8 +109,8 @@ const telemetryStream = `
     function playBackTelemetryStream() {
         let xmlString = telemetryStream;
         let chunks = [];
-        let tagStack = [];
         let currentChunk = '';
+        let tagStack = [];
         let lastPos = 0;
 
         while (lastPos < xmlString.length) {
