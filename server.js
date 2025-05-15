@@ -62,7 +62,7 @@ const xmlStream = `
 <Position Car="21" Distance_Behind="" Laps_Behind="" Rank="23" Time_Behind="" brake="0" currentLap="" rpm="7541" speed="67.47" throttle="0" steering="-47" Battery_Pct_Remaining="68" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="63"/>
 <Position Car="90" Distance_Behind="" Laps_Behind="" Rank="24" Time_Behind="" brake="30" currentLap="" rpm="9931" speed="86.611" throttle="0" steering="-13" Battery_Pct_Remaining="100" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="64"/>
 <Position Car="30" Distance_Behind="" Laps_Behind="" Rank="25" Time_Behind="" brake="0" currentLap="" rpm="8944" speed="78.886" throttle="98" steering="28" Battery_Pct_Remaining="82" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="73"/>
-<Position Car="76" Distance_Behind="" Laps_Behind="" Rank="26" Time_Behind="" brake="43" currentLap="" rpm="9332" speed="126.464" throttle="0" steering="2" Battery_Pct_Remaining="69" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="61"/>
+<Position Car="76" Distance_Behind="" Laps_Behind="" Rank="26" Time_Behind="" brake="43" currentLap="" rpm="9332" speed="126.464" throttle="0" steering="2" Battery_Pct_Remaining="0" Regin_Active="False" Deploy_Active="False" Deploy_Eligible="False" Lap_Remaining="0"/>
 <Position Car="51" Distance_Behind="" Laps_Behind="" Rank="27" Time_Behind="" brake="0" currentLap="" rpm="8100" speed="68.769" throttle="92" steering="25" Battery_Pct_Remaining="46" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="78"/>
 </Telemetry_Leaderboard>
 
@@ -115,36 +115,47 @@ function extractRootTags(xmlString) {
     
     let tagStack = [tagName];
     let searchIndex = startTagEndIndex + 1;
+    let foundCompleteTag = false;
     
-    while(tagStack.length > 0){
+    while (tagStack.length > 0 && !foundCompleteTag) {
         const nextStartTag = xmlString.indexOf('<', searchIndex);
         const nextEndTag = xmlString.indexOf('</', searchIndex);
-        
-        if(nextStartTag === -1 && nextEndTag === -1){
-            break;
-        }
-        
-        if(nextStartTag !== -1 && nextStartTag < nextEndTag){
-            const nextTagName = xmlString.substring(nextStartTag+1, xmlString.indexOf('>',nextStartTag)).split(' ')[0];
-            tagStack.push(nextTagName);
-            searchIndex = xmlString.indexOf('>',nextStartTag) + 1;
+
+        if (nextStartTag !== -1 && nextStartTag < nextEndTag) {
+            const nextTagName = xmlString.substring(nextStartTag + 1, xmlString.indexOf('>', nextStartTag)).split(' ')[0];
+            const isSelfClosingTag = xmlString.substring(xmlString.indexOf('>', nextStartTag) - 1, xmlString.indexOf('>', nextStartTag)) === '/';
             
-        } else if (nextEndTag !== -1){
-            const closingTagName = xmlString.substring(nextEndTag+2, xmlString.indexOf('>',nextEndTag)).split(' ')[0];
-            const topOfStack = tagStack[tagStack.length-1];
-            if(topOfStack === closingTagName){
-                tagStack.pop();
-                searchIndex = xmlString.indexOf('>',nextEndTag) + 1;
+            if(isSelfClosingTag){
+               searchIndex = xmlString.indexOf('>', nextStartTag) + 1;
+               
             }
             else{
-                searchIndex = xmlString.indexOf('>',nextEndTag) + 1;
+              tagStack.push(nextTagName);
+              searchIndex = xmlString.indexOf('>', nextStartTag) + 1;
             }
+
+        } else if (nextEndTag !== -1) {
+            const closingTagName = xmlString.substring(nextEndTag + 2, xmlString.indexOf('>', nextEndTag)).split(' ')[0];
+            const topOfStack = tagStack[tagStack.length - 1];
+            if (topOfStack === closingTagName) {
+                tagStack.pop();
+                searchIndex = xmlString.indexOf('>', nextEndTag) + 1;
+                if(tagStack.length === 0){
+                    foundCompleteTag = true;
+                }
+            }
+            else{
+                 searchIndex = xmlString.indexOf('>', nextEndTag) + 1;
+            }
+        }
+        else{
+            searchIndex++;
         }
     }
     
-    endTagIndex = searchIndex - endTag.length;
-    rootTags.push(xmlString.substring(startTagStartIndex, endTagIndex + endTag.length));
-    currentIndex = endTagIndex + endTag.length;
+    endTagIndex = searchIndex;
+    rootTags.push(xmlString.substring(startTagStartIndex, endTagIndex));
+    currentIndex = endTagIndex;
   }
   return rootTags;
 }
