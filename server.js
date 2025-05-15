@@ -131,11 +131,6 @@ const telemetryStream = `
             if (!isClosingTag) {
                 tagStack.push(tagName);
                 currentChunk = xmlString.substring(lastPos, startTagClose + 1);
-                if (isSelfClosing) {
-                  chunks.push(currentChunk);
-                  currentChunk = '';
-                  tagStack.pop();
-                }
             } else {
                 const matchingTag = tagStack.pop();
                  if (matchingTag === tagName.slice(1)) {
@@ -145,6 +140,10 @@ const telemetryStream = `
                 }
             }
             lastPos = startTagClose + 1;
+             if (tagStack.length === 0 && currentChunk) {
+                  chunks.push(currentChunk);
+                  currentChunk = '';
+             }
         }
 
         console.log("Extracted Chunks:", chunks);
