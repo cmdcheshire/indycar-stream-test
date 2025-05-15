@@ -13,6 +13,7 @@ let telemetryStream = '';
 // Read the XML file
 try {
   telemetryStream = fs.readFileSync(xmlFilePath, 'utf8');
+  console.log("Telemetry file found.. reading")
 } catch (err) {
   console.error('Error reading XML file:', err);
   //  Handle the error appropriately, e.g., exit the program or use a default XML string
