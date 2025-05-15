@@ -9,7 +9,8 @@ function processXMLStream(stream) {
 
     parser.on('opentag', node => {
         if (inRecoveryMode) {
-            console.log('Recovered Chunk:', invalidDataBuffer.trim());
+            console.log('Recovered Chunk:');
+            console.log(invalidDataBuffer.trim());
             console.log('-------------------');
             invalidDataBuffer = '';
             inRecoveryMode = false;
