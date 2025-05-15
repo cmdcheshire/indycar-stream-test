@@ -1,57 +1,47 @@
-const sax = require('sax');
 const fs = require('fs');
 
-function processXMLStream(stream) {
-    const parser = sax.createStream(true);
-    let rootTagStack = [];
-    let invalidDataBuffer = '';
-    let inRecoveryMode = false;
-    let lastValidCloseTag = '';
-    let awaitingValidChunk = false; 
+function processTextFile(filePath) {
+    let chunks = [];
+    let currentChunk = [];
+    let emptyLineCount = 0;
 
-    parser.on('opentag', node => {
-        if (inRecoveryMode && awaitingValidChunk) {
-            // We've now found a full valid chunk, print the recovered chunk first
-            console.log('Recovered Chunk:');
-            console.log(lastValidCloseTag + invalidDataBuffer.trim());
+    const stream = fs.createReadStream(filePath, { encoding: 'utf-8' });
+
+    stream.on('data', data => {
+        const lines = data.split(/\r?\n/); // Handle different newline formats
+        for (const line of lines) {
+            if (line.trim() === '') {
+                emptyLineCount++;
+                if (emptyLineCount >= 2) {
+                    if (currentChunk.length > 0) {
+                        chunks.push(currentChunk.join('\n'));
+                        currentChunk = [];
+                    }
+                }
+            } else {
+                emptyLineCount = 0; // Reset when encountering non-empty lines
+                currentChunk.push(line);
+            }
+        }
+    });
+
+    stream.on('end', () => {
+        if (currentChunk.length > 0) {
+            chunks.push(currentChunk.join('\n')); // Add last chunk if any data remains
+        }
+
+        // Print the collected chunks
+        chunks.forEach((chunk, index) => {
+            console.log(`Chunk ${index + 1}:`);
+            console.log(chunk);
             console.log('-------------------');
-
-            // Reset recovery tracking
-            invalidDataBuffer = '';
-            inRecoveryMode = false;
-            awaitingValidChunk = false;
-        }
-
-        if (rootTagStack.length === 0) {
-            console.log('Root Tag:', node.name);
-        }
-        rootTagStack.push(node.name);
+        });
     });
 
-    parser.on('text', text => {
-        if (inRecoveryMode) {
-            invalidDataBuffer += text;
-        }
+    stream.on('error', err => {
+        console.error('Error reading file:', err.message);
     });
-
-    parser.on('closetag', tagName => {
-        rootTagStack.pop();
-        lastValidCloseTag = `</${tagName}>`;
-
-        if (inRecoveryMode) {
-            awaitingValidChunk = true; // Wait for a fully valid chunk before exiting recovery mode
-        }
-    });
-
-    parser.on('error', err => {
-        console.warn('Invalid data detected. Entering recovery mode...');
-        inRecoveryMode = true;
-        invalidDataBuffer = lastValidCloseTag; // Start recovery from last valid closing tag
-    });
-
-    stream.pipe(parser);
 }
 
-// Example usage: Reads telemetry.xml
-const xmlStream = fs.createReadStream('telemetry.xml', { encoding: 'utf-8' });
-processXMLStream(xmlStream);
+// Example usage
+processTextFile('telemetry.xml');
