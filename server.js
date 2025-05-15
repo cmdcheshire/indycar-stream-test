@@ -6,12 +6,12 @@ function processXMLStream(stream) {
     let rootTagStack = [];
     let invalidDataBuffer = '';
     let inRecoveryMode = false;
-    let lastClosingTag = '';
+    let lastValidCloseTag = '';
 
     parser.on('opentag', node => {
         if (inRecoveryMode) {
             console.log('Recovered Chunk:');
-            console.log(lastClosingTag + invalidDataBuffer.trim());
+            console.log(lastValidCloseTag + invalidDataBuffer.trim());
             console.log('-------------------');
             invalidDataBuffer = '';
             inRecoveryMode = false;
@@ -31,7 +31,7 @@ function processXMLStream(stream) {
 
     parser.on('closetag', tagName => {
         rootTagStack.pop();
-        lastClosingTag = `</${tagName}>`; // Save last valid closing tag
+        lastValidCloseTag = `</${tagName}>`; // Track last valid closing tag
     });
 
     parser.on('error', err => {
