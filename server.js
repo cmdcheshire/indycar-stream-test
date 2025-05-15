@@ -4,12 +4,27 @@ const fs = require('fs');
 function processXMLStream(stream) {
     const parser = sax.createStream(true);
     let rootTagStack = [];
+    let invalidDataBuffer = '';
+    let inRecoveryMode = false;
 
     parser.on('opentag', node => {
+        if (inRecoveryMode) {
+            console.log('Recovered Chunk:', invalidDataBuffer.trim());
+            console.log('-------------------');
+            invalidDataBuffer = '';
+            inRecoveryMode = false;
+        }
+
         if (rootTagStack.length === 0) {
             console.log('Root Tag:', node.name);
         }
         rootTagStack.push(node.name);
+    });
+
+    parser.on('text', text => {
+        if (inRecoveryMode) {
+            invalidDataBuffer += text;
+        }
     });
 
     parser.on('closetag', tagName => {
@@ -17,7 +32,8 @@ function processXMLStream(stream) {
     });
 
     parser.on('error', err => {
-        console.warn('Skipping unexpected text error:', err.message);
+        console.warn('Invalid data detected. Recovering...');
+        inRecoveryMode = true;
     });
 
     stream.pipe(parser);
