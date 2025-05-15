@@ -66,13 +66,47 @@ const xmlStream = `
 <Position Car="51" Distance_Behind="" Laps_Behind="" Rank="27" Time_Behind="" brake="0" currentLap="" rpm="8100" speed="68.769" throttle="92" steering="25" Battery_Pct_Remaining="46" Regin_Active="True" Deploy_Active="False" Deploy_Eligible="True" Lap_Remaining="78"/>
 </Telemetry_Leaderboard>
 
-<Flag Elapsed_Time="00:51:36" Laps_Completed="43" Status="green"/>
+<Completed_Lap Car="12" Fastest_Lap="34" Flag="green" Lap_Number="43" Lap_Time="69.6583" Laps_Behind_Leader="0" Laps_Led="0" Position="12" Time="00:51:22.3572" Time_Behind_Leader="33.5065"/>
+
+<Unofficial_Leaderboard Cars="27">
+<Position Car="77" Laps_Behind="0" Official="true" Rank="1" Time_Behind="0.0000"/>
+<Position Car="83" Laps_Behind="0" Official="true" Rank="2" Time_Behind="9.7817"/>
+<Position Car="27" Laps_Behind="0" Official="true" Rank="3" Time_Behind="15.6247"/>
+<Position Car="10" Laps_Behind="0" Official="true" Rank="4" Time_Behind="17.3205"/>
+<Position Car="60" Laps_Behind="0" Official="true" Rank="5" Time_Behind="21.0237"/>
+<Position Car="7" Laps_Behind="0" Official="true" Rank="6" Time_Behind="23.4422"/>
+<Position Car="3" Laps_Behind="0" Official="true" Rank="7" Time_Behind="28.8729"/>
+<Position Car="2" Laps_Behind="0" Official="true" Rank="8" Time_Behind="29.9286"/>
+<Position Car="26" Laps_Behind="0" Official="true" Rank="9" Time_Behind="31.3399"/>
+<Position Car="8" Laps_Behind="0" Official="true" Rank="10" Time_Behind="32.1561"/>
+<Position Car="9" Laps_Behind="0" Official="true" Rank="11" Time_Behind="32.9057"/>
+<Position Car="12" Laps_Behind="0" Official="true" Rank="12" Time_Behind="33.5065"/>
+<Position Car="14" Laps_Behind="0" Official="true" Rank="13" Time_Behind="35.8486"/>
+<Position Car="28" Laps_Behind="0" Official="true" Rank="14" Time_Behind="37.2781"/>
+<Position Car="5" Laps_Behind="0" Official="true" Rank="15" Time_Behind="37.6333"/>
+<Position Car="20" Laps_Behind="0" Official="true" Rank="16" Time_Behind="40.5952"/>
+<Position Car="15" Laps_Behind="0" Official="true" Rank="17" Time_Behind="41.7588"/>
+<Position Car="4" Laps_Behind="0" Official="true" Rank="18" Time_Behind="42.9044"/>
+<Position Car="66" Laps_Behind="0" Official="true" Rank="19" Time_Behind="44.7662"/>
+<Position Car="45" Laps_Behind="0" Official="true" Rank="20" Time_Behind="46.9910"/>
+<Position Car="18" Laps_Behind="0" Official="true" Rank="21" Time_Behind="54.7211"/>
+<Position Car="6" Laps_Behind="0" Official="true" Rank="22" Time_Behind="59.2868"/>
+<Position Car="21" Laps_Behind="0" Official="true" Rank="23" Time_Behind="61.3309"/>
+<Position Car="90" Laps_Behind="0" Official="true" Rank="24" Time_Behind="62.8533"/>
+<Position Car="30" Laps_Behind="0" Official="true" Rank="25" Time_Behind="66.0914"/>
+<Position Car="76" Laps_Behind="1" Official="true" Rank="26" Time_Behind="-"/>
+<Position Car="51" Laps_Behind="1" Official="true" Rank="27" Time_Behind="-"/>
+</Unofficial_Leaderboard>
+
+<Flag Elapsed_Time="00:51:23" Laps_Completed="43" Status="green"/>
+
+<Car_Status Car="28" Extended_Status="Active" GPS_Strength="100" Status="Active" Status_Code="1" Tire_Type="1" Push_To_Pass_Time_Left="54"/>
 
 <Race_Summary>
 <Session_Id>R1</Session_Id>
 <Flag>green</Flag>
 <Start_Time/>
-<Elapsed_Time>00:51:36</Elapsed_Time>
+<Elapsed_Time>00:51:23</Elapsed_Time>
 <Average_Speed>99.9099230480318</Average_Speed>
 <Cars_Running>27</Cars_Running>
 <Cars_Started>27</Cars_Started>
