@@ -148,13 +148,14 @@ const telemetryStream = `
         const intervalId = setInterval(() => {
           if (index < chunks.length) {
             const chunk = chunks[index] + '\\n';
+            console.log('Sending chunk:', chunk);  // Log the chunk being sent
             broadcast(chunk);
             index++;
           } else {
             clearInterval(intervalId);
             console.log('Telemetry stream playback complete.');
           }
-        }, 2500);
+        }, 1000); // Send every 1 second
       } else {
         console.log('No chunks found in the XML stream.');
       }
@@ -165,6 +166,10 @@ const telemetryStream = `
         client.write(data);
       });
     }
+
+    server.on('connection', (socket) => {  // Log new connections
+        console.log('New client connected:', socket.remoteAddress);
+    });
 
     server.listen(port, host, () => {
       console.log('TCP server listening on', host + ':' + port);
