@@ -59,6 +59,9 @@ setInterval(() => {
         const chunk = chunks[currentChunkIndex];
         clients.forEach(client => {
             client.write(chunk + '\n\n'); // Send chunk with separation
+            console.log("Sending chunk...");
+            console.log(chunk);
+            console.log("------------------------------------");
         });
 
         currentChunkIndex = (currentChunkIndex + 1) % chunks.length; // Restart at the end
