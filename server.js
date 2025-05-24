@@ -3,7 +3,7 @@ const net = require('net');
 
 const PORT = 5000;
 const FILE_PATH = 'telemetry.xml';
-const CHUNK_INTERVAL = 250; // Send data every 250ms
+const CHUNK_INTERVAL = 100; // Send data every 250ms
 
 let chunks = [];
 let currentChunkIndex = 0;
